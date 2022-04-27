@@ -1,5 +1,5 @@
 /*Aggiungere un file js in cui definire **un array di oggetti** che rappresentano i membri del team.
- Ogni membro ha le informazioni necessarie per stampare la relativa card: **name, Ruolo e Foto**.
+ Ogni membro ha le informazioni necessarie per stampare la relativa card: **Name, Ruolo e Foto**.
 Una volta definita la struttura dati, prendendo come riferimento la card di esempio presente nell’html,
  stampare dinamicamente una card per ogni membro del team.
 
@@ -14,58 +14,57 @@ inserito nell’array iniziale** e viene stampata una nuova card con tutte le in
 const team = [
 
   {
-    name : 'Wayne Barnett',
+    Name : 'Wayne Barnett',
     role : 'founder - ceo',
-    img : 'wayne-barnett-founder-ceo.jpg'
+    image : 'wayne-barnett-founder-ceo.jpg'
   },
   { 
-    name : 'Angela Caroll',
+    Name : 'Angela Caroll',
     role : 'chief editor',
-    img : 'angela-caroll-chief-editor.jpg'
+    image : 'angela-caroll-chief-editor.jpg'
   },
   {
-    name : 'Walter Gordon',
+    Name : 'Walter Gordon',
     role : 'Office Manager',
-    img : 'walter-gordon-office-manager.jpg'
+    image : 'walter-gordon-office-manager.jpg'
   },
   {
-    name : 'Angela Lopez',
+    Name : 'Angela Lopez',
     role : 'social media manager',
-    img : 'angela-lopez-social-media-manager.jpg'
+    image : 'angela-lopez-social-media-manager.jpg'
   },
   {
-    name : 'Scott Estrada',
+    Name : 'Scott Estrada',
     role : 'developer',
-    img : 'scott-estrada-developer.jpg'
+    image : 'scott-estrada-developer.jpg'
   },
   {
-    name : 'Barbara Ramos',
+    Name : 'Barbara Ramos',
     role : 'graphic designer',
-    img : 'barbara-ramos-graphic-designer.jpg'
-  }
+    image : 'barbara-ramos-graphic-designer.jpg'
+  },
   
 ];
 
 const container = document.querySelector('.team-container');
 
+init(team);
 
-displayCards(team);
 
-
-function displayCards(card) {
+function init(card) {
 
   for(let i = 0; i < team.length; i++) {
 
     const teamCard = document.createElement('div');
     teamCard.className = 'team-card';
 
-    const cardImg = createImg(card[i]);
+    const cardimage = createimage(card[i]);
 
     const cardTxt = createText(card[i]);
 
     container.append(teamCard);
 
-    teamCard.append(cardImg);
+    teamCard.append(cardimage);
     teamCard.append(cardTxt);
 
 
@@ -73,18 +72,18 @@ function displayCards(card) {
 
 }
 
-function createImg(crd){
+function createimage(crd){
 
-  const cardImg = document.createElement('div');
+  const cardimage = document.createElement('div');
 
-  cardImg.className = 'card-image';
+  cardimage.className = 'card-image';
 
-  cardImg.innerHTML = `<img
-  src="img/${crd.img}"
-  alt="${crd.name}"
+  cardimage.innerHTML = `<image
+  src="img/${crd.image}"
+  alt="${crd.Name}"
   />`;
 
-  return cardImg
+  return cardimage
 
 }
 
@@ -94,22 +93,25 @@ function createText(txt){
 
   cardText.className = 'card-text';
 
-  cardText.innerHTML = `<h3>${txt.name}</h3>
+  cardText.innerHTML = `<h3>${txt.Name}</h3>
                         <p>${txt.role}</p>`;
 
   return cardText
   
 }
 
-/* <div class="team-card">
-    <div class="card-image">
-      <img
-        src="img/wayne-barnett-founder-ceo.jpg"
-        alt="Wayne Barnett"
-      />
-    </div>
-    <div class="card-text">
-      <h3>Wayne Barnett</h3>
-      <p>Founder & CEO</p>
-    </div>
-  </div> */
+document.querySelector('button').addEventListener('click', createNewCard)
+
+function createNewCard(){
+  
+  const Name = document.getElementById('name').value;
+  const role = document.getElementById('role').value;
+  const image = document.getElementById('image').value;
+
+  team.push({Name, role, image},);
+
+  container.innerHTML = '';
+
+  init(team);
+}
+
